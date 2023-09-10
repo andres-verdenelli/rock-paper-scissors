@@ -1,5 +1,5 @@
 // let playerName = prompt("What's your name?")
-let playerSelection = prompt('Rock, Paper or Scissors')
+// let playerSelection = prompt('Rock, Paper or Scissors')
 let playerPoints = 0
 let computerPoints = 0
 let computerSelection = getComputerChoise()
@@ -25,4 +25,8 @@ function playRound(playerChoise, computerChoise) {
 	}
 }
 
-playRound(playerSelection, computerSelection)
+function game() {
+	playRound(playerSelection, computerSelection)
+}
+
+// game()

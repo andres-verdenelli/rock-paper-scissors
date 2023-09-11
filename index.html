@@ -14,21 +14,36 @@
         <h1>Rock Paper Scissors</h1>
     </header>
     <main>
-        <div class="names-container">
-            <div><h2>Player Name</h2></div>
-            <div><h2>-</h2></div>
-            <div><h2>Computer</h2></div>
+        <div id="welcome-container">
+            <span>What's your name?</span>
+            <input type="text" name="player-name" id="input-name">
+            <button id="submit-name-button">Accept</button>
+            
         </div>
-        <span>Score</s>
-        <div class="score-container">
-            <div><h3>3</h3></div>
-            <div><span>-</span></div>
-            <div><h3>2</h3></div>
+        <div id="game-container">
+            <div class="names-container">
+                <div><h2 id="player-name">Player Name</h2></div>
+                <div><h2>-</h2></div>
+                <div><h2>Computer</h2></div>
+            </div>
+            <span>Score</s>
+            <div class="score-container">
+                <div><h3 id="player-score">0</h3></div>
+                <div><span>-</span></div>
+                <div><h3 id="computer-score">0</h3></div>
+            </div>
+            <div id="buttons-container" >
+                <button id="rock-button">🪨</button>
+                <button id="paper-button">🧻</button>
+                <button id="scissors-button">✂️</button>
+                <div><span id="result"></span></div>
+            </div>
+            <div id="winner-container" style="display: none;">
+                <button id="play-again-button">Play again</button>
+                <button id="change-name-button">Change name</button>
+            </div>
         </div>
-        <button>🪨</button>
-        <button>🧻</button>
-        <button>✂️</button>
     </main>
-    <script src="index.js"></script>
+    <script src="index.js" defer ></script>
 </body>
 </html>

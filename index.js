@@ -1,32 +1,79 @@
-// let playerName = prompt("What's your name?")
-// let playerSelection = prompt('Rock, Paper or Scissors')
-let playerPoints = 0
-let computerPoints = 0
-let computerSelection = getComputerChoise()
+let playerName = ''
+let playerScore = 0
+let computerScore = 0
+const playerNameElement = document.getElementById('player-name')
+const rockButton = document.getElementById('rock-button')
+const paperButton = document.getElementById('paper-button')
+const scissorsButton = document.getElementById('scissors-button')
+const playerScoreElement = document.getElementById('player-score')
+const computerScoreElement = document.getElementById('computer-score')
+const resultElement = document.getElementById('result')
+const buttonsContainer = document.getElementById('buttons-container')
+const winnerContainer = document.getElementById('winner-container')
+const inputNameElement = document.getElementById('input-name')
+const submitNameButton = document.getElementById('submit-name-button')
+const gameContainer = document.getElementById('game-container')
+const welcomeContainer = document.getElementById('welcome-container')
+const playAgainButton = document.getElementById('play-again-button')
+const changeNameButton = document.getElementById('change-name-button')
 
-function getComputerChoise() {
-	const choise = ['Rock', 'Paper', 'Scissors']
-	return choise[Math.floor(Math.random() * choise.length)]
+rockButton.addEventListener('click', () => playRound('Rock'))
+paperButton.addEventListener('click', () => playRound('Paper'))
+scissorsButton.addEventListener('click', () => playRound('Scissors'))
+submitNameButton.addEventListener('click', () => {
+	playerName = inputNameElement.value
+	playerNameElement.innerText = playerName
+	inputNameElement.value = ''
+	startNewGame()
+})
+playAgainButton.addEventListener('click', () => {
+	startNewGame()
+})
+changeNameButton.addEventListener('click', () => {
+	welcomeContainer.style.display = 'flex'
+	gameContainer.style.display = 'none'
+})
+
+function getRandomChoise() {
+	const choices = ['Rock', 'Paper', 'Scissors']
+	return choices[Math.floor(Math.random() * choices.length)]
 }
-
-function playRound(playerChoise, computerChoise) {
-	let playerChoiseLower = playerChoise.toLowerCase()
-	let computerChoiseLower = computerChoise.toLowerCase()
-	if (playerChoiseLower === computerChoiseLower) {
-		console.log(`Tie, both choose ${playerChoise}`)
-	} else if (
-		(playerChoiseLower === 'rock' && computerChoiseLower === 'scissors') ||
-		(playerChoiseLower === 'paper' && computerChoiseLower === 'rock') ||
-		(playerChoiseLower === 'scissors' && computerChoiseLower === 'paper')
-	) {
-		console.log(`You win. ${playerChoise} win to ${computerChoise}`)
-	} else {
-		console.log(`Computer win.${computerChoise} win to ${playerChoise}`)
+function updateScores() {
+	playerScoreElement.innerText = playerScore
+	computerScoreElement.innerText = computerScore
+}
+function anyoneWon() {
+	if (playerScore === 2 || computerScore === 2) {
+		buttonsContainer.style.display = 'none'
+		winnerContainer.style.display = 'block'
 	}
 }
-
-function game() {
-	playRound(playerSelection, computerSelection)
+function playRound(playerChoise) {
+	const computerChoise = getRandomChoise()
+	if (playerChoise === computerChoise) {
+		resultElement.innerText = `Tie 🤝`
+	} else if (
+		(playerChoise === 'Rock' && computerChoise === 'Scissors') ||
+		(playerChoise === 'Paper' && computerChoise === 'Rock') ||
+		(playerChoise === 'Scissors' && computerChoise === 'Paper')
+	) {
+		resultElement.innerText = `${playerName} win 💪`
+		playerScore++
+	} else {
+		resultElement.innerText = `Computer win 😞`
+		computerScore++
+	}
+	updateScores()
+	anyoneWon()
 }
 
-// game()
+function startNewGame() {
+	playerScore = 0
+	computerScore = 0
+	updateScores()
+	resultElement.innerText = ''
+	welcomeContainer.style.display = 'none'
+	gameContainer.style.display = 'block'
+	buttonsContainer.style.display = 'block'
+	winnerContainer.style.display = 'none'
+}
